@@ -1,0 +1,23 @@
+﻿@model CORE.Entities.Movies
+<div>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <p class="text-center fs-2 fw-bold">Movies in The Theater Now</p>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3 mx-2">
+                    <div class="card rounded-4 shadow-sm hvr-grow">
+                        <img src="~/@Model.ImageURL" class="card-img-top" alt="Movie Poster">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Name</h5>
+                            <p class="card-text">@Model.Description</p>
+                        </div>
+                    </div>
+                    <a href="/Admin/ViewMovieDetails/@Model.Id" style="margin-left: 12%;">
+                        <button class="btn mt-3 btn-outline-dark rounded-pill border-2 ms-5 mb-3"
+                                type="submit">
+                            View Details
+                        </button>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div> 

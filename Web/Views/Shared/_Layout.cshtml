@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/css/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/index.css" rel="stylesheet" />
+</head>
+<body> 
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <ion-icon name="film-outline" class="fs-3 me-2"></ion-icon>
+            @Html.ActionLink("Movie Magic", "Index", "Home", null, new { @class = "navbar-brand me-5" })
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link hover:text-info text-decoration-none position-relative" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle hover:text-info text-decoration-none position-relative" href="#"
+                           id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Movies
+                            <span class="underline"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                @Html.ActionLink("Gallery", "Gallery", "Home", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Action", "Action", "Home", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Comedy", "Comedy", "Home", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Cartoon", "Cartoon", "Home", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Love Story", "Love", "Home", null, new { @class = "dropdown-item" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Horror", "Horror", "Home", null, new { @class = "dropdown-item" })
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link hover:text-info text-decoration-none position-relative" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link hover:text-info text-decoration-none position-relative" })
+                    </li>
+                </ul>
+                <partial name="_LoginPartial"></partial>
+            </div>
+        </div>
+    </nav> 
+    @RenderBody();
+    <div class="footer">
+        <div class="name">
+            <p>Movie Magic</p>
+            <ion-icon name="film-outline" style="font-size: 80px;"></ion-icon>
+        </div>
+        <div class="links">
+            <p>Quick Links</p>
+            <ul>
+                <a href="/Home/Index/index.html">
+                <li>Home</li></a>
+                <a href="/Home/Gallery/gallery.html">
+                <li>Movies</li></a>
+                <a href="/Home/About/about.html">
+                <li>About</li></a>
+                <a href="/Home/Contact/contact.html">
+                <li>Contact</li></a>
+            </ul>
+        </div>
+        <div class="movies">
+            <p>Movies</p>
+            <ul>
+                <a href="/Home/Action/action.html">
+                <li>Action</li></a>
+                <a href="/Home/Comedy/comedy.html">
+                <li>Comedy</li></a>
+                <a href="/Home/Horror/horror.html">
+                <li>Horror</li></a>
+                <a href="/Home/Cartoon/cartoon.html">
+                <li>Cartoon</li></a>
+                <a href="/Home/Love/love.html">
+                <li>Love Story</li></a>
+            </ul>
+        </div>
+        <div class="contact">
+            <p class="p">Contact</p>
+            <p><ion-icon name="call" style="margin-right: 10px;"></ion-icon>30832739</p>
+            <p><ion-icon name="mail" style="margin-right: 10px;"></ion-icon>chirfan@gmail.com</p>
+            <p><ion-icon name="pin" style="margin-right: 10px;"></ion-icon>jfakf ejrkjfk djk</p>
+        </div>
+        <hr style="width: 90%; color: white;">
+        <div class="icons">
+            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+            <a href="#"> <ion-icon name="logo-instagram"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </div>
+        <p style="padding-left: 150px; padding-right: 150px; text-align: center;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor temporibus voluptatum officia ratione eaque? Omnis, at mollitia harum accusamus illo, quae corporis soluta cupiditate asperiores unde eligendi accusantium similique quis! Eaque earum quam quidem sit.</p>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="~/js/js/bootstrap.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿<style>
+    body {
+        background-color: #f8f9fa; 
+    }
+    .title
+    {
+        font-size:2.5rem;
+        font-weight:bold;
+    }
+    .service-section {
+        background-color: #e9ecef; 
+        padding: 50px 0; 
+        border-radius: 25px;
+        margin-top: 50px;
+    }
+    .service-card {
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        height: 100%;
+        transition: transform 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .service-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    .service-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    .service-content {
+        font-size: 1rem;
+        color: #6c757d;
+        flex-grow: 1;
+    }
+    .service-content-container {
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        margin: 0 auto;
+        width: 85%;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .service-content-wrapper {
+        padding-bottom: 10px;
+    }
+</style>
+<div class="container service-section">
+    <h2 class="text-center mb-5 title">Our Services</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="service-content-wrapper">
+                <div class="service-content-container service-card">
+                    <img src="~/Images/seats.jpg" alt="Service 1" class="service-image mb-3">
+                    <h4 class="service-title">Easy Booking</h4>
+                    <p class="service-content">Book your movie tickets with just a few clicks, quickly and easily.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="service-content-wrapper">
+                <div class="service-content-container service-card">
+                    <img src="~/Images/discount.jpg" alt="Service 2" class="service-image mb-3">
+                    <h4 class="service-title">Exclusive Discounts</h4>
+                    <p class="service-content">Enjoy special discounts and offers exclusively for our members.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="service-content-wrapper">
+                <div class="service-content-container service-card">
+                    <img src="~/Images/About/4.jpg" alt="Service 3" class="service-image mb-3">
+                    <h4 class="service-title">Variety of Movies</h4>
+                    <p class="service-content">Choose from a wide range of movies across all genres.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="service-content-wrapper">
+                <div class="service-content-container service-card">
+                    <img src="~/Images/customer_support_banner.jpeg" alt="Service 4" class="service-image mb-3">
+                    <h4 class="service-title">24/7 Support</h4>
+                    <p class="service-content">Our customer support is available 24/7 to assist you with any inquiries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@model CORE.Entities.Movies
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie</title>
+    <link href="~/css/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/adminforms.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center">Add Movie</h2>
+        <form method="post" action="/Admin/AddMovie" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <!-- Existing form fields -->
+            <div class="form-group">
+                <label for="movieName">Movie Name:</label>
+                <input type="text" class="form-control" id="movieName" name="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <select class="form-control" id="genre" name="Genre">
+                    <option value="action">Action</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="romantic">Romantic</option>
+                    <option value="cartoon">Cartoon</option>
+                    <option value="horror">Horror</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="releaseDate">Release Date:</label>
+                <input type="date" class="form-control" id="releaseDate" name="ReleaseDate" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="Description" id="description" required class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="poster">Upload Poster:</label>
+                <input type="file" class="form-control" id="poster" name="Image">
+            </div>
+            <div class="form-group">
+                <label for="trailer">Movie Trailer URL:</label>
+                <input type="url" class="form-control" id="trailer" name="Trailer" required>
+            </div>
+
+            <!-- Mandatory Actor Input Field -->
+            <div class="form-group">
+                <label for="actorName0">Actor Name:</label>
+                <input type="text" class="form-control" id="actorName0" name="ActorName" required>
+            </div>
+            <div class="form-group">
+                <label for="actorImage0">Actor Image:</label>
+                <input type="file" class="form-control" id="actorImage0" name="ImageURL" required>
+            </div>
+
+            <!-- Dynamic Actor Input Fields -->
+           <div class="form-group">
+                <label>Additional Actors:</label>
+                <div id="actors-list">
+                    <!-- Additional actor input fields will be added here dynamically -->
+                </div>
+                <button type="button" class="btn btn-secondary mt-2" onclick="addActor()">Add Another Actor</button>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Add Movie</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Function to add a new actor input field
+        function addActor() {
+            const actorsList = document.getElementById('actors-list');
+            const actorIndex = actorsList.children.length;
+
+            const actorDiv = document.createElement('div');
+            actorDiv.classList.add('actor-input', 'mb-3');
+            actorDiv.innerHTML = `
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="actorName${actorIndex + 1}">Actor Name:</label>
+                                        <input type="text" class="form-control" id="actorName${actorIndex + 1}" name="Actors[${actorIndex + 1}].Name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="actorImage${actorIndex + 1}">Actor Image:</label>
+                                        <input type="file" class="form-control" id="actorImage${actorIndex + 1}" name="Actors[${actorIndex + 1}].Image" required>
+                                    </div>
+                                </div>
+                            `;
+
+            actorsList.appendChild(actorDiv);
+        }
+        function validateForm() {
+            const actorsList = document.getElementById('actors-list');
+            const actorInputs = actorsList.querySelectorAll('input[name^="Actors"]');
+            const minActors = 1;
+            if (document.querySelector('input[name="Actors[0].Name"]').value.trim() === '') {
+                alert('Please provide at least one actor.');
+                return false;
+            }
+
+            return true;
+        }
+    </script> 
+    <script src="~/js/js/bootstrap.bundle.js"></script>
+</body>
+</html>

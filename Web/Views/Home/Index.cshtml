@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_Layout";
+}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<link href="~/css/homecss.css" rel="stylesheet" />
+<div class="animation-screen">
+    <div class="hero-section d-flex align-items-center justify-content-center text-center">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to Movie Magic</h1>
+            <p class="hero-description mx-5">
+                Movie Magic is your premier online movie ticket platform, offering the best movie experiences and services.
+                From the latest blockbusters to timeless classics, we ensure you have access to top-notch entertainment and
+                the most convenient booking experience. Join us and discover why Movie Magic is the go-to destination for movie lovers!
+            </p>
+            <div class="animated-characters">
+                <div class="character"></div>
+                <div class="character"></div>
+                <div class="character"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_HomeAbout.cshtml"></partial>
+<partial name="_Services"></partial>
+<partial name="_HomeMovies.cshtml" model="Model"></partial>

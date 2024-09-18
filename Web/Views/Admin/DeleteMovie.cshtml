@@ -1,0 +1,29 @@
+﻿@model CORE.Entities.Movies
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/css/adminforms.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center">Delete Movie</h2>
+        <form method="post" action="/Admin/DeleteMovie">
+            <div class="form-group">
+                <label for="movieId">Movie ID:</label>
+                <input type="number" class="form-control" id="movieId" name="Id" min="1" required>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+        </form>
+    </div>
+    <script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

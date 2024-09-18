@@ -1,0 +1,109 @@
+﻿<style>
+    .about-us {
+        position: relative;
+        padding: 5rem 0;
+        background-color: #e9ecef;
+        width:85%;
+        margin: 0 auto;
+        margin-top:50px;
+        border-radius:15px;
+    }
+
+        .about-us::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            background-color: #e9ecef;
+            border-radius: 0.5rem;
+            z-index: -1;
+        }
+
+        .about-us .section-title {
+            font-size: 2.5rem;
+            margin-top:-40px;
+            margin-bottom: 1.5rem;
+            color: #343a40;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+        }
+
+        .about-us .card {
+            border-radius: 0.5rem;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-us .card-img-top {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .about-us .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .about-us .card-title {
+            font-size: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .about-us .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .about-us .card {
+            transition: none;
+        }
+
+        .about-us .card-img-top {
+            transition: none;
+        }
+
+</style>
+<section class="about-us">
+    <div class="container text-center">
+        <h2 class="section-title">Why Choose Movie Magic?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <img src="~/Images/seats.jpg" class="card-img-top" alt="Wide Selection">
+                    <div class="card-body">
+                        <h5 class="card-title">Wide Selection</h5>
+                        <p class="card-text">Choose from a vast library of movies, including the latest releases and timeless classics. We have something for everyone!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <img src="~/Images/seats.jpg" class="card-img-top" alt="Seamless Booking">
+                    <div class="card-body">
+                        <h5 class="card-title">Seamless Booking</h5>
+                        <p class="card-text">Enjoy a smooth and intuitive booking process. With just a few clicks, you can secure your tickets and be ready for the show.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <img src="~/Images/customer_support_banner.jpeg" class="card-img-top" alt="Customer Support">
+                    <div class="card-body">
+                        <h5 class="card-title">Customer Support</h5>
+                        <p class="card-text">Our dedicated support team is here to assist you with any questions or issues you might have. We're committed to making your experience enjoyable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

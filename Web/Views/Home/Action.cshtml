@@ -1,0 +1,99 @@
+﻿@model List<CORE.Entities.Movies>
+@{
+    Layout = "_Layout";
+}
+<link href="~/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .movie-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        transition: transform 0.3s;
+        width: 100%;
+        max-width: 320px;
+        height: 370px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+    }
+
+    .movie-poster {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s;
+    }
+
+    .movie-item:hover .movie-poster {
+        opacity: 0.7;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .movie-item:hover .overlay {
+        opacity: 1;
+    }
+
+    .overlay-content h5,
+    .overlay-content p {
+        margin: 0;
+    }
+
+    .overlay-content h5 {
+        font-size: 1.25rem;
+    }
+
+    .overlay-content p {
+        font-size: 1rem;
+    }
+
+    button .btn:hover {
+        background-color: white;
+        color: black;
+        border-color: black;
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <p class="text-center fs-2 fw-bold">Action Movies</p>
+        @foreach (var vm in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="movie-item">
+                    <img src="@Url.Content($"~/{vm.ImageURL}")" class="img-fluid movie-poster" alt="@vm.Name">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <h5 class="card-title mb-3">@vm.Name</h5>
+                            <p class="card-text">@vm.Description</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <a href="/Home/ViewMovieDetails/@vm.Id">
+                        <button class="btn mt-3 btn-outline-dark rounded-pill border-2 ms-5 mb-3" type="button">
+                            View Details
+                        </button>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="~/js/bootstrap.bundle.min.js"></script>

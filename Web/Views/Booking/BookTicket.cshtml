@@ -1,0 +1,393 @@
+﻿@model SeatsViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Seats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+            .legend div {
+                margin: 0 15px;
+                display: flex;
+                align-items: center;
+            }
+
+        .color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .white {
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .seat-container {
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .block {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #fff;
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+            .block h2 {
+                margin-bottom: 10px;
+                font-size: 16px;
+                text-align: center;
+            }
+        .seats {
+            display: grid;
+            gap: 5px;
+            justify-content: center;
+        }
+
+            .seats[data-size="4"] {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .seats[data-size="5"] {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+        .seat {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+        }
+
+            .seat.booked {
+                background-color: red;
+                cursor: not-allowed;
+            }
+
+            .seat.selected {
+                background-color: green;
+            }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #bookButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .summary-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: right;
+            min-width: 200px;
+            margin-left: 20px;
+            display: none; /* Initially hidden */
+        }
+
+        .block-wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+            .block-wrapper > .block {
+                flex: 1;
+                margin: 0 10px;
+            }
+
+                .block-wrapper > .block:first-child {
+                    margin-left: 0;
+                }
+
+                .block-wrapper > .block:last-child {
+                    margin-right: 0;
+                }
+
+        .block {
+            border: 2px solid #ddd;
+        }
+
+            .block:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            .block:not(:last-child) {
+                margin-right: 20px;
+            }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+        }
+
+            .modal h2 {
+                margin-bottom: 15px;
+            }
+
+            .modal button {
+                padding: 10px 20px;
+                font-size: 16px;
+                margin: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .modal #confirmBtn {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .modal #cancelBtn {
+                background-color: #ccc;
+                color: black;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Seats</h1>
+        <div class="legend">
+            <div><span class="color red"></span> Booked</div>
+            <div><span class="color white"></span> Available</div>
+            <div><span class="color green"></span> Selected</div>
+        </div>
+        <div class="seat-container">
+            <div class="block-wrapper">
+                <div class="block" id="blockA">
+                    <h2>Block A - RS.250/seat</h2>
+                    <div class="seats" data-size="4" id="blockA-seats">
+                        <!-- Block A: 4x4 seats -->
+                    </div>
+                </div>
+                <div class="block" id="blockB">
+                    <h2>Block B - RS.250/seat</h2>
+                    <div class="seats" data-size="4" id="blockB-seats">
+                        <!-- Block B: 4x4 seats -->
+                    </div>
+                </div>
+            </div>
+            <div class="block-wrapper">
+                <div class="block" id="blockC">
+                    <h2>Block C - RS.150/seat</h2>
+                    <div class="seats" data-size="5" id="blockC-seats">
+                        <!-- Block C: 5x5 seats -->
+                    </div>
+                </div>
+                <div class="block" id="blockD">
+                    <h2>Block D - RS.150/seat</h2>
+                    <div class="seats" data-size="5" id="blockD-seats">
+                        <!-- Block D: 5x5 seats -->
+                    </div>
+                </div>
+                <div class="block" id="blockE">
+                    <h2>Block E - RS.150/seat</h2>
+                    <div class="seats" data-size="5" id="blockE-seats">
+                        <!-- Block E: 5x5 seats -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="bookButton">Book</button>
+            <div class="summary-box" id="summaryBox">
+                <h2>Seat Selection Summary</h2>
+                <p id="totalSeats">Total Seats Selected: 0</p>
+                <p id="totalPrice">Total Price: RS.0</p>
+                <p id="selectedSeats">Seat Numbers: </p>
+            </div>
+        </div>
+    </div>
+    <div id="confirmationModal" class="modal">
+        <h2>Confirm Your Booking</h2>
+        <p id="modalTotalPrice"></p>
+        <p id="modalSeatNumbers"></p>
+        <button id="confirmBtn">Confirm</button>
+        <button id="cancelBtn">Cancel</button>
+    </div>
+
+
+    <input type="hidden" id="mID" value="@Model.MovieId" />
+    <input type="hidden" id="sID" value="@Model.ShowId" />
+
+
+    <script>
+        const seatsArray = new Array(118).fill(null);
+        @foreach (var seat in Model.Seats)
+        {
+            <text>
+                seatsArray[@seat.SeatId] = {
+                    seatId: @seat.SeatId,
+                    isAvailable: @seat.IsAvailable.ToString().ToLower()
+                };
+            </text>
+        }
+        function createSeats(start, end, containerId, blockPrice) {
+            const container = document.getElementById(containerId);
+            let seatsHTML = '';
+            for (let i = start; i <= end; i++) {
+                const seat = seatsArray[i];
+                let seatClass = 'seat';
+                if (seat && !seat.isAvailable) {
+                    seatClass += ' booked';
+                }
+                seatsHTML += `<div class="${seatClass}" data-number="${i}" data-price="${blockPrice}">${i}</div>`;
+            }
+            container.innerHTML = seatsHTML;
+        }
+        createSeats(1, 16, 'blockA-seats', 250);
+        createSeats(17, 32, 'blockB-seats', 250);
+        createSeats(33, 57, 'blockC-seats', 150);
+        createSeats(58, 82, 'blockD-seats', 150);
+        createSeats(83, 107, 'blockE-seats', 150);
+        document.querySelectorAll('.seat').forEach(seat => {
+            seat.addEventListener('click', function () {
+                if (!this.classList.contains('booked')) {
+                    this.classList.toggle('selected');
+                    updateSummary();
+                }
+            });
+        });
+        document.getElementById('bookButton').addEventListener('click', function () {
+            const selectedSeats = document.querySelectorAll('.seat.selected');
+            const seatNumbers = Array.from(selectedSeats).map(seat => seat.dataset.number).join(', ');
+            const totalPrice = Array.from(selectedSeats).reduce((sum, seat) => sum + parseInt(seat.dataset.price), 0);
+            if (selectedSeats.length > 0) {
+                const confirmDialog = document.getElementById('confirmationModal');
+                document.getElementById('modalTotalPrice').textContent = `Total Price: RS.${totalPrice}`;
+                document.getElementById('modalSeatNumbers').textContent = `Seats: ${seatNumbers}`;
+                confirmDialog.style.display = 'block';
+                document.getElementById('confirmBtn').addEventListener('click', function () {
+                    const movieId = '@Model.MovieId';
+                    const showId = '@Model.ShowId';
+                    const userEmail = '@User.Identity.Name';
+                    const bookingData = {
+                        UserEmail: '@User.Identity.Name', 
+                        ShowId: '@Model.ShowId',
+                        SeatNumbers: seatNumbers, 
+                        TotalPrice: totalPrice,
+                        MovieId: '@Model.MovieId'
+                    };
+                    fetch('/Booking/ConfirmBooking', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(bookingData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Booking confirmed successfully!');
+                            selectedSeats.forEach(seat => seat.classList.add('booked'));
+                            selectedSeats.forEach(seat => seat.classList.remove('selected'));
+                            updateSummary();
+                        } else {
+                            alert('There was an error processing your booking.');
+                        }
+                        confirmDialog.style.display = 'none';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        confirmDialog.style.display = 'none';
+                    });
+                }, { once: true }); 
+
+                document.getElementById('cancelBtn').addEventListener('click', function () {
+                    confirmDialog.style.display = 'none';
+                }, { once: true }); 
+            } else {
+                alert('Please select at least one seat.');
+            }
+        });
+        function updateSummary() {
+            const selectedSeats = document.querySelectorAll('.seat.selected');
+            const seatNumbers = Array.from(selectedSeats).map(seat => seat.dataset.number).join(', ');
+            const totalPrice = Array.from(selectedSeats).reduce((sum, seat) => sum + parseInt(seat.dataset.price), 0);
+            document.getElementById('totalSeats').textContent = `Total Seats Selected: ${selectedSeats.length}`;
+            document.getElementById('totalPrice').textContent = `Total Price: RS.${totalPrice}`;
+            document.getElementById('selectedSeats').textContent = `Seat Numbers: ${seatNumbers}`;
+            if (selectedSeats.length > 0) {
+                document.getElementById('summaryBox').style.display = 'block';
+            } else {
+                document.getElementById('summaryBox').style.display = 'none';
+            }
+        }
+    </script>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/RealTimeBookingUpdate.js"></script>
+</body>
+</html>

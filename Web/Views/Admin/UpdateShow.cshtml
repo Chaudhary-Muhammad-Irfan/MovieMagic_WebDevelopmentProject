@@ -1,0 +1,62 @@
+﻿@model CORE.Entities.MovieShows
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Show</title>
+    <link href="~/css/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/adminforms.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center">Update Show</h2>
+        @if (Model != null)
+        {
+            <form method="post" action="/Admin/UpdateShow">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="form-group">
+                    <label for="movieId">Movie ID:</label>
+                    <input type="number" class="form-control" id="movieId" name="MovieId" value="@Model.movieId" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="movieName">Movie Name:</label>
+                    <input type="text" class="form-control" id="movieName" name="MovieName" value="@Model.movieName" required>
+                </div>
+                <div class="form-group">
+                    <label for="showDate">Show Date:</label>
+                    <input type="date" class="form-control" id="showDate" name="ShowDate" value="@Model.showDate.ToString("yyyy-MM-dd")" required>
+                </div>
+                <div class="form-group">
+                    <label for="showTime">Show Time:</label>
+                    <input type="time" class="form-control" id="showTime" name="ShowTime" value="@Model.showTime.ToString("hh\\:mm")" required>
+                </div>
+                <div class="form-group">
+                    <label for="showDay">Day:</label>
+                    @Html.DropDownListFor(m => m.showDay, new List<SelectListItem>
+                {
+                new SelectListItem { Text = "Sunday", Value = "Sunday" },
+                new SelectListItem { Text = "Monday", Value = "Monday" },
+                new SelectListItem { Text = "Tuesday", Value = "Tuesday" },
+                new SelectListItem { Text = "Wednesday", Value = "Wednesday" },
+                new SelectListItem { Text = "Thursday", Value = "Thursday" },
+                new SelectListItem { Text = "Friday", Value = "Friday" },
+                new SelectListItem { Text = "Saturday", Value = "Saturday" }
+                }, htmlAttributes: new { @class = "form-control", required = "required" })
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to Update this show?')">Update</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <p class="text-center text-danger">Show not found.</p>
+        }
+    </div>
+    <script src="~/js/js/bootstrap.bundle.js"></script>
+</body>
+</html>
