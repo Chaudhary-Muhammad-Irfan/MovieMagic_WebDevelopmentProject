@@ -1,11 +1,13 @@
 ﻿using Application_Layer.Services;
 using CORE.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace YourNamespace.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MovieShowsController : ControllerBase

@@ -70,7 +70,6 @@ app.UseRouting();
 app.UseSession();
 //-------------------------------------------------------Session----------------------------------------
 
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

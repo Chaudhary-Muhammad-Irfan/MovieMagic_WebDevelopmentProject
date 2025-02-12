@@ -13,7 +13,7 @@ using Web_Development_Project.Data;
 using Web_Development_Project.Models; 
 namespace Web_Development_Project.Controllers  
 { 
-    [Authorize(Policy = "AdminPolicy")] 
+    [Authorize(Policy = "AdminPolicy")]  
     public class AdminController : Controller
     { 
         private readonly ILogger<AdminController> _logger; 
